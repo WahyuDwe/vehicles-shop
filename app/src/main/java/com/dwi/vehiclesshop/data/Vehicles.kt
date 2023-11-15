@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "kendaraan")
 data class Vehicles(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_kendaraan")
@@ -17,7 +17,7 @@ data class Vehicles(
     val color: String,
 
     @ColumnInfo(name = "harga")
-    val price: String,
+    val price: Int,
 
     @ColumnInfo(name = "stok")
     val stock: Int,

@@ -4,6 +4,8 @@ import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontFamily
+import com.dwi.vehiclesshop.data.TabItem
 
 @Composable
 fun Tabs(selectedTabIndex: Int, titles: List<TabItem>, onTabSelected: (Int) -> Unit) {
@@ -13,12 +15,15 @@ fun Tabs(selectedTabIndex: Int, titles: List<TabItem>, onTabSelected: (Int) -> U
             Tab(
                 selected = selectedTabIndex == index,
                 onClick = { onTabSelected(index) },
-                text = { Text(text = item.title, maxLines = 1) }
+                text = {
+                    Text(
+                        text = item.title,
+                        maxLines = 1,
+                        fontFamily = FontFamily.Monospace
+                    )
+                }
             )
         }
     }
 }
 
-data class TabItem(
-    val title: String,
-)

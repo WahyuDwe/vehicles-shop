@@ -11,8 +11,7 @@ import androidx.compose.ui.Modifier
 fun HorizontalPager(modifier: Modifier, pagerState: PagerState, content: @Composable (Int) -> Unit ) {
     androidx.compose.foundation.pager.HorizontalPager(
         state = pagerState,
-        modifier = modifier
-            .fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) { index ->
         content(index)
     }
