@@ -1,4 +1,4 @@
-package com.dwi.vehiclesshop.data
+package com.dwi.vehiclesshop.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

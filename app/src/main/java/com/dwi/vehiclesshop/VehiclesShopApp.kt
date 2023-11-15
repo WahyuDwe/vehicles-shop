@@ -14,7 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.dwi.vehiclesshop.data.TabItem
+import com.dwi.vehiclesshop.data.model.TabItem
 import com.dwi.vehiclesshop.ui.component.HorizontalPager
 import com.dwi.vehiclesshop.ui.component.Tabs
 import com.dwi.vehiclesshop.ui.component.TopBar
