@@ -1,12 +1,12 @@
-package com.dwi.vehiclesshop.data
+package com.dwi.vehiclesshop.data.local.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.dwi.vehiclesshop.data.model.Car
-import com.dwi.vehiclesshop.data.model.MotorCycle
-import com.dwi.vehiclesshop.data.model.Vehicles
+import com.dwi.vehiclesshop.data.local.model.Car
+import com.dwi.vehiclesshop.data.local.model.MotorCycle
+import com.dwi.vehiclesshop.data.local.model.Vehicles
 
 @Database(
     entities = [
@@ -26,8 +26,10 @@ abstract class VehiclesDatabase() : RoomDatabase() {
             val instance = Room.databaseBuilder(
                 context.applicationContext,
                 VehiclesDatabase::class.java,
-                "vehicles.db"
-            ).createFromAsset("database/vehicles.db")
+                "Sample.db"
+            )
+                .fallbackToDestructiveMigration()
+                .createFromAsset("vehicles_int.db")
                 .build()
             INSTANCE = instance
             instance

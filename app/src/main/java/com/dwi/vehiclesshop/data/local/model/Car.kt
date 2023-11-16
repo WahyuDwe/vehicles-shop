@@ -1,4 +1,4 @@
-package com.dwi.vehiclesshop.data.model
+package com.dwi.vehiclesshop.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "mobil")
 data class Car(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id_mobil")
-    val idCar: String,
+    val idCar: Int,
 
     @ColumnInfo(name = "mesin")
     val engine: String,

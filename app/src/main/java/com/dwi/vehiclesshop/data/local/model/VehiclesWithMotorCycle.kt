@@ -1,4 +1,4 @@
-package com.dwi.vehiclesshop.data.model
+package com.dwi.vehiclesshop.data.local.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
@@ -7,8 +7,8 @@ data class VehiclesWithMotorCycle(
     @Embedded
     val vehicles: Vehicles,
     @Relation(
-        parentColumn = "id_kendaraan",
+        parentColumn = "type_id",
         entityColumn = "id_motor",
     )
-    val motorCycle: List<MotorCycle>,
+    val motorCycle: MotorCycle? = null,
 )

@@ -71,8 +71,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended-android:1.5.4")
 
     val roomVersion = "2.6.0"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    implementation ("androidx.room:room-ktx:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
@@ -81,6 +80,7 @@ dependencies {
     implementation ("androidx.activity:activity-ktx:1.6.1") //by viewModels()
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1") //lifecycleScope
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1") //asLiveData
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
 
 }

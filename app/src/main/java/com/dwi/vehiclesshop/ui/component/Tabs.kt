@@ -5,7 +5,7 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
-import com.dwi.vehiclesshop.data.model.TabItem
+import com.dwi.vehiclesshop.data.local.model.TabItem
 
 @Composable
 fun Tabs(selectedTabIndex: Int, titles: List<TabItem>, onTabSelected: (Int) -> Unit) {

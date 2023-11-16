@@ -1,4 +1,4 @@
-package com.dwi.vehiclesshop.data.model
+package com.dwi.vehiclesshop.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "kendaraan")
 data class Vehicles(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id_kendaraan")
-    val idVehicles: Long = 0,
+    val idVehicles: Int,
 
     @ColumnInfo(name = "tahun_keluaran")
     val year: String,
@@ -23,5 +23,5 @@ data class Vehicles(
     val stock: Int,
 
     @ColumnInfo(name = "type_id")
-    val typeId: Long,
+    val typeId: Int,
 )

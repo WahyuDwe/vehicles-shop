@@ -1,4 +1,4 @@
-package com.dwi.vehiclesshop.data.model
+package com.dwi.vehiclesshop.data.local.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
@@ -6,9 +6,10 @@ import androidx.room.Relation
 data class VehiclesWithCar (
     @Embedded
     val vehicles: Vehicles,
+
     @Relation(
-        parentColumn = "id_kendaraan",
+        parentColumn = "type_id",
         entityColumn = "id_mobil",
     )
-    val car: List<Car>,
+    val car: Car? = null,
 )
