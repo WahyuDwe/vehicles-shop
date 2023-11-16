@@ -59,11 +59,11 @@ fun CarContent(
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                Text(text = car.vehicles.idVehicles.toString())
-                Text(text = car.vehicles.year)
-                Text(text = car.vehicles.price.toString())
-                Text(text = car.vehicles.stock.toString())
-                Text(text = car.vehicles.typeId.toString())
+                Text(text = "id vehicles : ${car.vehicles.idVehicles}")
+                Text(text = "tahun : ${car.vehicles.year}")
+                Text(text = "harga : ${car.vehicles.price}")
+                Text(text = "stok : ${car.vehicles.stock}")
+                Text(text = "typeId : ${car.vehicles.typeId}")
                 car.car?.let {
                     Text(text = it.idCar.toString())
                     Text(text = it.engine)
