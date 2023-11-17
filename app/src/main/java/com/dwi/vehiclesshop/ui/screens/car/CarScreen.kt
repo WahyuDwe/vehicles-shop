@@ -1,21 +1,14 @@
 package com.dwi.vehiclesshop.ui.screens.car
 
 import android.util.Log
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.dwi.vehiclesshop.data.local.model.VehiclesWithCar
 import com.dwi.vehiclesshop.di.Injection
 import com.dwi.vehiclesshop.ui.common.UiState
+import com.dwi.vehiclesshop.ui.screens.car.component.CarContent
 import com.dwi.vehiclesshop.utils.ViewModelFactory
 
 @Composable
@@ -33,6 +26,7 @@ fun CarScreen(
             is UiState.Loading -> {
                 viewModel.getAllCars()
             }
+
             is UiState.Success -> {
                 Log.d("CarScreen", "CarScreen: ${it.data}")
                 val data = it.data
@@ -41,35 +35,9 @@ fun CarScreen(
                     modifier = modifier
                 )
             }
-            is UiState.Error -> {}
-        }
-    }
-}
 
-@Composable
-fun CarContent(
-    cars: List<VehiclesWithCar>,
-    modifier: Modifier,
-) {
-    LazyColumn(modifier = modifier) {
-        items(cars) { car ->
-            Log.d("CarContent", "CarContent: $car")
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Text(text = "id vehicles : ${car.vehicles.idVehicles}")
-                Text(text = "tahun : ${car.vehicles.year}")
-                Text(text = "harga : ${car.vehicles.price}")
-                Text(text = "stok : ${car.vehicles.stock}")
-                Text(text = "typeId : ${car.vehicles.typeId}")
-                car.car?.let {
-                    Text(text = it.idCar.toString())
-                    Text(text = it.engine)
-                    Text(text = it.capacity.toString())
-                    Text(text = it.type)
-                }
+            is UiState.Error -> {
+                // TODO: do nothing
             }
         }
     }

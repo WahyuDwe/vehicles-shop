@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface VehiclesDao {
     @Transaction
-    @Query("SELECT * FROM kendaraan WHERE type_id LIKE '2%'")
+    @Query("SELECT * FROM kendaraan WHERE type_id LIKE 'MR%'")
     fun getVehicleWithMotorCycle(): Flow<List<VehiclesWithMotorCycle>>
 
     @Transaction
-    @Query("SELECT * FROM kendaraan WHERE type_id LIKE '1%'")
+    @Query("SELECT * FROM kendaraan WHERE type_id LIKE 'MB%'")
     fun getVehicleWithCar(): Flow<List<VehiclesWithCar>>
 
     @Query("SELECT * FROM motor")

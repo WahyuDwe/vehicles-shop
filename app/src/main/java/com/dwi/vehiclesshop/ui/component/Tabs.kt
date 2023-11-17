@@ -8,8 +8,11 @@ import androidx.compose.ui.text.font.FontFamily
 import com.dwi.vehiclesshop.data.local.model.TabItem
 
 @Composable
-fun Tabs(selectedTabIndex: Int, titles: List<TabItem>, onTabSelected: (Int) -> Unit) {
-
+fun Tabs(
+    selectedTabIndex: Int,
+    titles: List<TabItem>,
+    onTabSelected: (Int) -> Unit
+) {
     PrimaryTabRow(selectedTabIndex = selectedTabIndex) {
         titles.forEachIndexed { index, item ->
             Tab(

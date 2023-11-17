@@ -8,7 +8,11 @@ import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HorizontalPager(modifier: Modifier, pagerState: PagerState, content: @Composable (Int) -> Unit ) {
+fun HorizontalPager(
+    modifier: Modifier,
+    pagerState: PagerState,
+    content: @Composable (Int) -> Unit
+) {
     androidx.compose.foundation.pager.HorizontalPager(
         state = pagerState,
         modifier = modifier.fillMaxWidth()

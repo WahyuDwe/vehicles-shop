@@ -29,7 +29,7 @@ abstract class VehiclesDatabase() : RoomDatabase() {
                 "Sample.db"
             )
                 .fallbackToDestructiveMigration()
-                .createFromAsset("vehicles_int.db")
+                .createFromAsset("vehicles_string.db")
                 .build()
             INSTANCE = instance
             instance

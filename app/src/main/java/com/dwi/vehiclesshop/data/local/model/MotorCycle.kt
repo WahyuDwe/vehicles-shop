@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class MotorCycle(
     @PrimaryKey
     @ColumnInfo(name = "id_motor")
-    val idMotorCycle: Int,
+    val idMotorCycle: String,
 
     @ColumnInfo(name = "mesin")
     val engine: String,

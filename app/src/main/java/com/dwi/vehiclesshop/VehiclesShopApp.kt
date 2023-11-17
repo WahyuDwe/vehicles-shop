@@ -26,8 +26,8 @@ import com.dwi.vehiclesshop.ui.screens.motorcycle.MotorCycleScreen
 fun VehiclesShopApp(modifier: Modifier = Modifier) {
     var state by remember { mutableIntStateOf(0) }
     val tabItems = listOf(
-        TabItem(title = "Cars"),
-        TabItem(title = "Motorcycles")
+        TabItem(title = "Mobil"),
+        TabItem(title = "Motor")
     )
     val pagerState = rememberPagerState {
         tabItems.size
