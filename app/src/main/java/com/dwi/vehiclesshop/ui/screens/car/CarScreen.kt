@@ -16,7 +16,8 @@ fun CarScreen(
     modifier: Modifier = Modifier,
     viewModel: CarViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository(context = LocalContext.current))
-    )
+    ),
+    navigateToDetail: (String) -> Unit,
 ) {
     Log.d("CarScreen", "CarScreen: ")
     viewModel.uiState.collectAsState(
@@ -32,7 +33,8 @@ fun CarScreen(
                 val data = it.data
                 CarContent(
                     cars = data,
-                    modifier = modifier
+                    modifier = modifier,
+                    navigateToDetail = navigateToDetail,
                 )
             }
 

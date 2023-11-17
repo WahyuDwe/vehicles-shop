@@ -19,6 +19,10 @@ class VehiclesRepository(private val localDataSource: LocalDataSource) : IVehicl
         return localDataSource.getMotorCycle()
     }
 
+    override fun getVehicleIdByMotorCycle(id: String): Flow<VehiclesWithMotorCycle> {
+        return localDataSource.getVehicleIdByMotorCycle(id)
+    }
+
     companion object {
         @Volatile
         private var instance: VehiclesRepository? = null

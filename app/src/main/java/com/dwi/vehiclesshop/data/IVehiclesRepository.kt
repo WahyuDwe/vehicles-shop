@@ -11,4 +11,6 @@ interface IVehiclesRepository {
     fun getVehiclesWithCar(): Flow<List<VehiclesWithCar>>
 
     fun getMotorCycle(): Flow<List<MotorCycle>>
+
+    fun getVehicleIdByMotorCycle(id: String): Flow<VehiclesWithMotorCycle>
 }

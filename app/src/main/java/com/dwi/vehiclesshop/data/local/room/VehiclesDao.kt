@@ -21,4 +21,8 @@ interface VehiclesDao {
     @Query("SELECT * FROM motor")
     fun getMotorCycle(): Flow<List<MotorCycle>>
 
+    @Transaction
+    @Query("SELECT * FROM kendaraan WHERE id_kendaraan = :id")
+    fun getVehicleIdByMotorCycle(id: String): Flow<VehiclesWithMotorCycle>
+
 }

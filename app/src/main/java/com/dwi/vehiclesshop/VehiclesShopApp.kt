@@ -1,60 +1,60 @@
 package com.dwi.vehiclesshop
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.dwi.vehiclesshop.data.local.model.TabItem
-import com.dwi.vehiclesshop.ui.component.HorizontalPager
-import com.dwi.vehiclesshop.ui.component.Tabs
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.dwi.vehiclesshop.ui.component.TopBar
-import com.dwi.vehiclesshop.ui.screens.car.CarScreen
-import com.dwi.vehiclesshop.ui.screens.motorcycle.MotorCycleScreen
+import com.dwi.vehiclesshop.ui.navigation.Screen
+import com.dwi.vehiclesshop.ui.screens.detail.DetailItemScreen
+import com.dwi.vehiclesshop.ui.screens.home.HomeScreen
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun VehiclesShopApp(modifier: Modifier = Modifier) {
-    var state by remember { mutableIntStateOf(0) }
-    val tabItems = listOf(
-        TabItem(title = "Mobil"),
-        TabItem(title = "Motor")
-    )
-    val pagerState = rememberPagerState {
-        tabItems.size
-    }
-    LaunchedEffect(state) {
-        pagerState.animateScrollToPage(state)
-    }
-    LaunchedEffect(pagerState.currentPage) {
-        state = pagerState.currentPage
-    }
+fun VehiclesShopApp(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController()
+) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
 
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        TopBar()
-        Tabs(selectedTabIndex = state, tabItems, onTabSelected = { state = it })
-        HorizontalPager(modifier = modifier, pagerState = pagerState) { index ->
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(1f),
-                contentAlignment = Alignment.Center
+    Scaffold(
+        topBar = {
+            if (currentRoute == Screen.Home.route) {
+                TopBar(navHostController = navController)
+            }
+        }, modifier = modifier
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Home.route,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(Screen.Home.route) {
+                HomeScreen(modifier = modifier, navigateToDetail = { itemId ->
+                    navController.navigate(Screen.DetailItem.createRoute(itemId))
+                })
+            }
+
+            composable(
+                Screen.DetailItem.route,
+                arguments = listOf(navArgument("itemId") { type = NavType.StringType })
             ) {
-                when (index) {
-                    0 -> CarScreen(modifier = modifier)
-                    1 -> MotorCycleScreen(modifier = modifier)
-                }
+                val id = it.arguments?.getString("itemId") ?: ""
+                DetailItemScreen(
+                    itemId = id,
+                    navigateBack = { navController.navigateUp() },
+                )
             }
 
         }

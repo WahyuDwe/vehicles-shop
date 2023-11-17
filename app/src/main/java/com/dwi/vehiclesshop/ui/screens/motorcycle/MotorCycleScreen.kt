@@ -15,7 +15,8 @@ fun MotorCycleScreen(
     modifier: Modifier,
     viewModel: MotorCyclesViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository(LocalContext.current))
-    )
+    ),
+    navigateToDetail: (String) -> Unit,
 ) {
     viewModel.uiState.collectAsState(
         initial = UiState.Loading
@@ -28,7 +29,8 @@ fun MotorCycleScreen(
                 val data = it.data
                 MotorCycleContent(
                     motorCycles = data,
-                    modifier = modifier
+                    modifier = modifier,
+                    navigateToDetail = navigateToDetail,
                 )
             }
             is UiState.Error -> {}

@@ -14,6 +14,9 @@ class LocalDataSource private constructor(private val vehiclesDao: VehiclesDao) 
 
     fun getMotorCycle() = vehiclesDao.getMotorCycle()
 
+    fun getVehicleIdByMotorCycle(id: String): Flow<VehiclesWithMotorCycle> =
+        vehiclesDao.getVehicleIdByMotorCycle(id)
+
     companion object {
         private var instance: LocalDataSource? = null
 

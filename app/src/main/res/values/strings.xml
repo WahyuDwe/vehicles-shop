@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VehiclesShop</string>
+    <string name="vehicles_shop">Vehicles Shop</string>
+    <string name="back">back</string>
 </resources>
