@@ -27,7 +27,6 @@ import java.util.Locale
 fun MotorCycleContent(
     motorCycles: List<VehiclesWithMotorCycle>,
     modifier: Modifier,
-    navigateToDetail: (String) -> Unit,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(bottom = 32.dp)

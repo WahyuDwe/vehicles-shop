@@ -23,42 +23,8 @@ import com.dwi.vehiclesshop.ui.screens.home.HomeScreen
 @Composable
 fun VehiclesShopApp(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
 ) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
-
-    Scaffold(
-        topBar = {
-            if (currentRoute == Screen.Home.route) {
-                TopBar(navHostController = navController)
-            }
-        }, modifier = modifier
-    ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = Screen.Home.route,
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            composable(Screen.Home.route) {
-                HomeScreen(modifier = modifier, navigateToDetail = { itemId ->
-                    navController.navigate(Screen.DetailItem.createRoute(itemId))
-                })
-            }
-
-            composable(
-                Screen.DetailItem.route,
-                arguments = listOf(navArgument("itemId") { type = NavType.StringType })
-            ) {
-                val id = it.arguments?.getString("itemId") ?: ""
-                DetailItemScreen(
-                    itemId = id,
-                    navigateBack = { navController.navigateUp() },
-                )
-            }
-
-        }
-    }
+    HomeScreen(modifier = modifier)
 }
 
 @Preview(showBackground = true)

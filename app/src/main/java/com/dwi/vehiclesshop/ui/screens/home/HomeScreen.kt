@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import com.dwi.vehiclesshop.data.local.model.TabItem
 import com.dwi.vehiclesshop.ui.component.HorizontalPager
 import com.dwi.vehiclesshop.ui.component.Tabs
+import com.dwi.vehiclesshop.ui.component.TopBar
 import com.dwi.vehiclesshop.ui.screens.car.CarScreen
 import com.dwi.vehiclesshop.ui.screens.motorcycle.MotorCycleScreen
 
@@ -23,8 +24,8 @@ import com.dwi.vehiclesshop.ui.screens.motorcycle.MotorCycleScreen
 @Composable
 fun HomeScreen(
     modifier: Modifier,
-    navigateToDetail: (String) -> Unit,
-) {
+
+    ) {
     var state by remember { mutableIntStateOf(0) }
     val tabItems = listOf(
         TabItem(title = "Mobil"),
@@ -39,10 +40,10 @@ fun HomeScreen(
     LaunchedEffect(pagerState.currentPage) {
         state = pagerState.currentPage
     }
-
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        TopBar()
         Tabs(selectedTabIndex = state, tabItems, onTabSelected = { state = it })
         HorizontalPager(modifier = modifier, pagerState = pagerState) { index ->
             Box(
@@ -52,8 +53,8 @@ fun HomeScreen(
                 contentAlignment = Alignment.Center
             ) {
                 when (index) {
-                    0 -> CarScreen(modifier = modifier, navigateToDetail = navigateToDetail)
-                    1 -> MotorCycleScreen(modifier = modifier, navigateToDetail = navigateToDetail)
+                    0 -> CarScreen()
+                    1 -> MotorCycleScreen()
                 }
             }
 

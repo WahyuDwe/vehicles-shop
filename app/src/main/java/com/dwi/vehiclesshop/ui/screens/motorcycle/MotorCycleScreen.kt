@@ -12,11 +12,10 @@ import com.dwi.vehiclesshop.utils.ViewModelFactory
 
 @Composable
 fun MotorCycleScreen(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     viewModel: MotorCyclesViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository(LocalContext.current))
     ),
-    navigateToDetail: (String) -> Unit,
 ) {
     viewModel.uiState.collectAsState(
         initial = UiState.Loading
@@ -30,7 +29,6 @@ fun MotorCycleScreen(
                 MotorCycleContent(
                     motorCycles = data,
                     modifier = modifier,
-                    navigateToDetail = navigateToDetail,
                 )
             }
             is UiState.Error -> {}
