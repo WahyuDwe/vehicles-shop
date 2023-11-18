@@ -24,7 +24,6 @@ import com.dwi.vehiclesshop.ui.screens.motorcycle.MotorCycleScreen
 @Composable
 fun HomeScreen(
     modifier: Modifier,
-
     ) {
     var state by remember { mutableIntStateOf(0) }
     val tabItems = listOf(

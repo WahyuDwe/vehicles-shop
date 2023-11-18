@@ -13,7 +13,6 @@ import com.dwi.vehiclesshop.utils.ViewModelFactory
 
 @Composable
 fun CarScreen(
-    modifier: Modifier = Modifier,
     viewModel: CarViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository(context = LocalContext.current))
     ),
@@ -32,7 +31,6 @@ fun CarScreen(
                 val data = it.data
                 CarContent(
                     vehiclesWithCars = data,
-                    modifier = modifier,
                 )
             }
 
