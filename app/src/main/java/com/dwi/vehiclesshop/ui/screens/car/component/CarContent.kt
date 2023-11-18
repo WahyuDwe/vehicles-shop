@@ -3,27 +3,42 @@ package com.dwi.vehiclesshop.ui.screens.car.component
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -43,11 +58,15 @@ fun CarContent(
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     val showBottomSheet = remember { mutableStateMapOf<Int, Boolean>() }
+    var expandedDropDownMenu = remember { mutableStateMapOf<Int, Boolean>() }
+    val selectedStock = remember { mutableStateMapOf<Int, Int>() }
 
     LazyColumn(
         contentPadding = PaddingValues(bottom = 32.dp),
     ) {
         itemsIndexed(vehiclesWithCars) { index, car ->
+            selectedStock[index] = selectedStock[index] ?: 1
+            expandedDropDownMenu[index] = expandedDropDownMenu[index] ?: false
             OutlinedCard(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface,
@@ -59,9 +78,7 @@ fun CarContent(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 16.dp
+                        start = 16.dp, end = 16.dp, top = 16.dp
                     ),
             ) {
                 Column(
@@ -140,7 +157,6 @@ fun CarContent(
                     }
                     Button(
                         onClick = {
-//                            showBottomSheet = true
                             showBottomSheet[index] = true
                             Log.d(
                                 "CarContent",
@@ -292,6 +308,57 @@ fun CarContent(
                                             Text(text = it.type)
                                         }
                                     }
+                                }
+                                Spacer(modifier = modifier.padding(top = 16.dp))
+                                ExposedDropdownMenuBox(
+                                    expanded = expandedDropDownMenu[index] ?: false,
+                                    onExpandedChange = {
+                                        expandedDropDownMenu[index] =
+                                            !expandedDropDownMenu[index]!!
+                                    },
+                                    modifier = modifier.align(Alignment.End)
+                                ) {
+                                    OutlinedTextField(
+                                        label = { Text(text = "Stok") },
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .menuAnchor(),
+                                        readOnly = true,
+                                        shape = RoundedCornerShape(12.dp),
+                                        value = selectedStock[index]?.toString() ?: "",
+                                        onValueChange = {},
+                                        trailingIcon = {
+                                            ExposedDropdownMenuDefaults.TrailingIcon(
+                                                expanded = expandedDropDownMenu[index] ?: false
+                                            )
+                                        },
+                                        colors = ExposedDropdownMenuDefaults.textFieldColors(),
+                                    )
+
+                                    ExposedDropdownMenu(
+                                        expanded = expandedDropDownMenu[index] ?: false,
+                                        onDismissRequest = {
+                                            expandedDropDownMenu[index] = false
+                                        },
+                                        modifier = Modifier
+                                            .heightIn(min = 56.dp, max = 300.dp)
+                                            .verticalScroll(rememberScrollState())
+                                    ) {
+                                        (1..car.vehicles.stock).forEach { selectionOptions ->
+                                            DropdownMenuItem(
+                                                text = { Text(text = selectionOptions.toString()) },
+                                                onClick = {
+                                                    selectedStock[index] = selectionOptions
+                                                    expandedDropDownMenu[index] = false
+                                                })
+
+                                        }
+                                    }
+
+                                }
+                                Spacer(modifier = modifier.padding(top = 12.dp))
+                                Button(onClick = { /*TODO*/ }, modifier = modifier.fillMaxWidth()) {
+                                    Text(text = "Lanjutkan")
                                 }
                             }
 
