@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dwi.vehiclesshop.data.local.model.Car
 import com.dwi.vehiclesshop.data.local.model.MotorCycle
+import com.dwi.vehiclesshop.data.local.model.Purchases
 import com.dwi.vehiclesshop.data.local.model.Vehicles
 
 @Database(
@@ -13,6 +14,7 @@ import com.dwi.vehiclesshop.data.local.model.Vehicles
         Vehicles::class,
         Car::class,
         MotorCycle::class,
+        Purchases::class
     ], version = 1, exportSchema = false
 )
 abstract class VehiclesDatabase() : RoomDatabase() {
@@ -26,9 +28,8 @@ abstract class VehiclesDatabase() : RoomDatabase() {
             val instance = Room.databaseBuilder(
                 context.applicationContext,
                 VehiclesDatabase::class.java,
-                "Sample.db"
+                "vehicles.db"
             )
-                .fallbackToDestructiveMigration()
                 .createFromAsset("vehicles_string.db")
                 .build()
             INSTANCE = instance

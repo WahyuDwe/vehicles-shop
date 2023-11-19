@@ -17,6 +17,7 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -27,11 +28,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dwi.vehiclesshop.data.local.model.Car
-import com.dwi.vehiclesshop.data.local.model.MotorCycle
+import com.dwi.vehiclesshop.data.local.model.Purchases
 import com.dwi.vehiclesshop.data.local.model.Vehicles
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithCar
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithMotorCycle
+import com.dwi.vehiclesshop.ui.screens.car.CarViewModel
+import com.dwi.vehiclesshop.ui.screens.motorcycle.MotorCyclesViewModel
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -43,6 +45,7 @@ fun <T> BottomSheet(
     index: Int,
     vehicle: Vehicles,
     typeOfVehicle: T,
+    viewModel: T,
 ) {
     val numberFormat = NumberFormat.getNumberInstance(Locale("in", "ID"))
     val sheetState = rememberModalBottomSheetState()
@@ -199,7 +202,6 @@ fun <T> BottomSheet(
                     is VehiclesWithCar -> {
                         val car = typeOfVehicle as VehiclesWithCar
                         car.car?.let {
-
                             Row(
                                 modifier = modifier.fillMaxWidth(),
                             ) {
@@ -317,7 +319,45 @@ fun <T> BottomSheet(
 
                 }
                 Spacer(modifier = modifier.padding(top = 12.dp))
-                Button(onClick = { }, modifier = modifier.fillMaxWidth()) {
+                Button(
+                    onClick = {
+                        when (viewModel) {
+                            is CarViewModel -> {
+                                val carViewModel = viewModel as CarViewModel
+                                carViewModel.purchaseVehicle(
+                                    Purchases(
+                                        idVehicle = vehicle.idVehicles,
+                                        total = selectedStock[index] ?: 1,
+                                        idTypeOfVehicle = vehicle.typeId,
+                                    )
+                                )
+                                carViewModel.updateStock(
+                                    vehicleId = vehicle.idVehicles,
+                                    quantity = selectedStock[index] ?: 1
+                                )
+                            }
+                            is MotorCyclesViewModel -> {
+                                val motorCyclesViewModel = viewModel as MotorCyclesViewModel
+                                motorCyclesViewModel.purchaseVehicle(
+                                    Purchases(
+                                        idVehicle = vehicle.idVehicles,
+                                        total = selectedStock[index] ?: 1,
+                                        idTypeOfVehicle = vehicle.typeId,
+                                    )
+                                )
+                                motorCyclesViewModel.updateStock(
+                                    vehicleId = vehicle.idVehicles,
+                                    quantity = selectedStock[index] ?: 1
+                                )
+                            }
+                        }
+
+                        showBottomSheet[index] = false
+
+
+                    },
+                    modifier = modifier.fillMaxWidth(),
+                ) {
                     Text(text = "Lanjutkan")
                 }
             }

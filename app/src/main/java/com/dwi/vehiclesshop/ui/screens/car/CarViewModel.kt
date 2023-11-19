@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dwi.vehiclesshop.data.VehiclesRepository
+import com.dwi.vehiclesshop.data.local.model.Purchases
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithCar
 import com.dwi.vehiclesshop.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,18 @@ class CarViewModel(private val repository: VehiclesRepository) : ViewModel() {
                     Log.d("CarViewModel", "getAllCars: $it")
                     _uiState.value = UiState.Success(it)
                 }
+        }
+    }
+
+    fun purchaseVehicle(purchases: Purchases) {
+        viewModelScope.launch {
+            repository.purchaseVehicle(purchases)
+        }
+    }
+
+    fun updateStock(vehicleId : String, quantity : Int) {
+        viewModelScope.launch {
+            repository.updateVehicle(vehicleId, quantity)
         }
     }
 }

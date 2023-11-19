@@ -31,6 +31,7 @@ fun CarScreen(
                 val data = it.data
                 CarContent(
                     vehiclesWithCars = data,
+                    viewModel = viewModel,
                 )
             }
 

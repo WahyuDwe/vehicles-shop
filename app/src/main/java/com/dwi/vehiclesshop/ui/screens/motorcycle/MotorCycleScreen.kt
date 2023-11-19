@@ -27,6 +27,7 @@ fun MotorCycleScreen(
                 val data = it.data
                 MotorCycleContent(
                     vehiclesWithMotorCycles = data,
+                    viewModel = viewModel,
                 )
             }
 

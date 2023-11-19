@@ -3,6 +3,7 @@ package com.dwi.vehiclesshop.ui.screens.motorcycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dwi.vehiclesshop.data.VehiclesRepository
+import com.dwi.vehiclesshop.data.local.model.Purchases
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithMotorCycle
 import com.dwi.vehiclesshop.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,18 @@ class MotorCyclesViewModel(private val repository: VehiclesRepository) : ViewMod
                 .collect {
                     _uiState.value = UiState.Success(it)
                 }
+        }
+    }
+
+    fun purchaseVehicle(purchases: Purchases) {
+        viewModelScope.launch {
+            repository.purchaseVehicle(purchases)
+        }
+    }
+
+    fun updateStock(vehicleId : String, quantity : Int) {
+        viewModelScope.launch {
+            repository.updateVehicle(vehicleId, quantity)
         }
     }
 }

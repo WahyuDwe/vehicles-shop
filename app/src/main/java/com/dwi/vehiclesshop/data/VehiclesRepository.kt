@@ -2,6 +2,8 @@ package com.dwi.vehiclesshop.data
 
 import com.dwi.vehiclesshop.data.local.LocalDataSource
 import com.dwi.vehiclesshop.data.local.model.MotorCycle
+import com.dwi.vehiclesshop.data.local.model.Purchases
+import com.dwi.vehiclesshop.data.local.model.Vehicles
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithCar
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithMotorCycle
 import kotlinx.coroutines.flow.Flow
@@ -15,12 +17,12 @@ class VehiclesRepository(private val localDataSource: LocalDataSource) : IVehicl
         return localDataSource.getVehiclesWithCar()
     }
 
-    override fun getMotorCycle(): Flow<List<MotorCycle>> {
-        return localDataSource.getMotorCycle()
+    override suspend fun purchaseVehicle(purchases: Purchases) {
+        return localDataSource.purchaseVehicle(purchases)
     }
 
-    override fun getVehicleIdByMotorCycle(id: String): Flow<VehiclesWithMotorCycle> {
-        return localDataSource.getVehicleIdByMotorCycle(id)
+    override suspend fun updateVehicle(vehicleId: String, quantity: Int) {
+        return localDataSource.updateVehicle(vehicleId, quantity)
     }
 
     companion object {

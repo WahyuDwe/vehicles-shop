@@ -1,5 +1,7 @@
 package com.dwi.vehiclesshop.data.local
 
+import com.dwi.vehiclesshop.data.local.model.Purchases
+import com.dwi.vehiclesshop.data.local.model.Vehicles
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithCar
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithMotorCycle
 import com.dwi.vehiclesshop.data.local.room.VehiclesDao
@@ -12,10 +14,15 @@ class LocalDataSource private constructor(private val vehiclesDao: VehiclesDao) 
     fun getVehiclesWithCar(): Flow<List<VehiclesWithCar>> =
         vehiclesDao.getVehicleWithCar()
 
-    fun getMotorCycle() = vehiclesDao.getMotorCycle()
+    suspend fun purchaseVehicle(purchases: Purchases) = vehiclesDao.purchaseVehicle(purchases)
 
-    fun getVehicleIdByMotorCycle(id: String): Flow<VehiclesWithMotorCycle> =
-        vehiclesDao.getVehicleIdByMotorCycle(id)
+    suspend fun updateVehicle(vehicleId: String, quantity: Int) {
+        val vehicle = vehiclesDao.getVehicleById(vehicleId)
+        vehicle.let {
+            val updateStock = it.copy(stock = it.stock - quantity)
+        vehiclesDao.updateVehicle(updateStock)
+        }
+    }
 
     companion object {
         private var instance: LocalDataSource? = null

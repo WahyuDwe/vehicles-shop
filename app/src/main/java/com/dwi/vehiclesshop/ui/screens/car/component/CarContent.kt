@@ -11,12 +11,14 @@ import androidx.compose.ui.unit.dp
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithCar
 import com.dwi.vehiclesshop.ui.component.BottomSheet
 import com.dwi.vehiclesshop.ui.component.MainCardContent
+import com.dwi.vehiclesshop.ui.screens.car.CarViewModel
 
 
 @Composable
 fun CarContent(
     modifier: Modifier = Modifier,
     vehiclesWithCars: List<VehiclesWithCar>,
+    viewModel: CarViewModel,
 ) {
     val showBottomSheet = remember { mutableStateMapOf<Int, Boolean>() }
 
@@ -30,7 +32,7 @@ fun CarContent(
                 modifier = modifier,
                 vehicle = vehicle,
                 index = index,
-                showBottomSheet = showBottomSheet
+                showBottomSheet = showBottomSheet,
             )
             BottomSheet(
                 modifier = modifier,
@@ -38,6 +40,7 @@ fun CarContent(
                 index = index,
                 vehicle = vehicle,
                 typeOfVehicle = cars,
+                viewModel = viewModel,
             )
         }
     }
