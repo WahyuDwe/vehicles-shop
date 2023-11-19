@@ -1,5 +1,30 @@
 <resources>
     <string name="app_name">VehiclesShop</string>
-    <string name="vehicles_shop">Vehicles Shop</string>
+    <string name="vehicles_shop">Toko Kendaraan</string>
     <string name="back">back</string>
+    <string name="pembelian_berhasil">Pembelian Berhasil</string>
+    <string name="info">Info</string>
+    <string name="jumlah_pembelian_tidak_boleh_kosong">Jumlah pembelian tidak boleh kosong</string>
+    <string name="beli">Beli</string>
+    <string name="tipe">Tipe</string>
+    <string name="kapasitas">Kapasitas</string>
+    <string name="mesin">Mesin</string>
+    <string name="tipe_transmisi">Tipe Transmisi</string>
+    <string name="tipe_suspensi">Tipe Suspensi</string>
+    <string name="stok">Stok</string>
+    <string name="warna">Warna</string>
+    <string name="harga">Harga</string>
+    <string name="tahun">Tahun</string>
+    <string name="detail_pembelian">Detail Pembelian</string>
+    <string name="unit">%1$s unit</string>
+    <string name="rp">Rp %1$s</string>
+    <string name="colon">:</string>
+    <string name="penumpang">%1$s penumpang</string>
+    <string name="jumlah">Jumlah</string>
+    <string name="pembelian_berhasil_dilakukan_sebanyak_unit_dengan_total_harga_rp">Pembelian berhasil dilakukan sebanyak %1$s unit dengan total harga Rp %2$s</string>
+    <string name="kendaraan_ini_belum_ada_yang_terjual">Kendaraan ini belum ada yang terjual</string>
+    <string name="kendaraan_ini_terjual_sebanyak_unit_dengan_total_penjualan_rp">Kendaraan ini terjual sebanyak %1$s unit, dengan total penjualan Rp %2$s</string>
+    <string name="stok_kendaraan_ini_kosong_silahkan_pilih_kendaraan_lain">Stok kendaraan ini kosong, silahkan pilih kendaraan lain</string>
+    <string name="mobil">Mobil</string>
+    <string name="motor">Motor</string>
 </resources>

@@ -13,7 +13,7 @@ data class MotorCycle(
     @ColumnInfo(name = "mesin")
     val engine: String,
 
-    @ColumnInfo(name ="tipe_suspensi")
+    @ColumnInfo(name = "tipe_suspensi")
     val suspensionType: String,
 
     @ColumnInfo(name = "tipe_transmisi")

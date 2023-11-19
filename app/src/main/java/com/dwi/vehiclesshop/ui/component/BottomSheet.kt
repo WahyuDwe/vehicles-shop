@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,17 +20,19 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dwi.vehiclesshop.R
 import com.dwi.vehiclesshop.data.local.model.Purchases
 import com.dwi.vehiclesshop.data.local.model.Vehicles
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithCar
@@ -51,8 +56,10 @@ fun <T> BottomSheet(
     val sheetState = rememberModalBottomSheetState()
     val expandedDropDownMenu = remember { mutableStateMapOf<Int, Boolean>() }
     val selectedStock = remember { mutableStateMapOf<Int, Int>() }
+    val openSuccessDialog = remember { mutableStateOf(false) }
+    val openEmptyAmountDialog = remember { mutableStateOf(false) }
 
-    selectedStock[index] = selectedStock[index] ?: 1
+    selectedStock[index] = selectedStock[index] ?: 0
     expandedDropDownMenu[index] = expandedDropDownMenu[index] ?: false
 
     if (showBottomSheet[index] == true) {
@@ -73,7 +80,7 @@ fun <T> BottomSheet(
 
             ) {
                 Text(
-                    text = "Detail Pembelian",
+                    text = stringResource(R.string.detail_pembelian),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 18.sp,
                 )
@@ -85,9 +92,9 @@ fun <T> BottomSheet(
                         Row(
                             modifier = modifier.weight(1f),
                         ) {
-                            Text(text = "Tahun")
+                            Text(text = stringResource(R.string.tahun))
                         }
-                        Text(text = ":")
+                        Text(text = stringResource(R.string.colon))
                         Row(
                             modifier = modifier.weight(1f),
                             horizontalArrangement = Arrangement.End
@@ -101,14 +108,14 @@ fun <T> BottomSheet(
                         Row(
                             modifier = modifier.weight(1f),
                         ) {
-                            Text(text = "Harga")
+                            Text(text = stringResource(R.string.harga))
                         }
-                        Text(text = ":")
+                        Text(text = stringResource(R.string.colon))
                         Row(
                             modifier = modifier.weight(1f),
                             horizontalArrangement = Arrangement.End
                         ) {
-                            Text(text = "Rp ${numberFormat.format(it.price)}")
+                            Text(text = stringResource(R.string.rp, numberFormat.format(it.price)))
                         }
                     }
                     Row(
@@ -117,9 +124,9 @@ fun <T> BottomSheet(
                         Row(
                             modifier = modifier.weight(1f),
                         ) {
-                            Text(text = "Warna")
+                            Text(text = stringResource(R.string.warna))
                         }
-                        Text(text = ":")
+                        Text(text = stringResource(R.string.colon))
                         Row(
                             modifier = modifier.weight(1f),
                             horizontalArrangement = Arrangement.End
@@ -133,14 +140,14 @@ fun <T> BottomSheet(
                         Row(
                             modifier = modifier.weight(1f),
                         ) {
-                            Text(text = "Stok")
+                            Text(text = stringResource(R.string.stok))
                         }
-                        Text(text = ":")
+                        Text(text = stringResource(R.string.colon))
                         Row(
                             modifier = modifier.weight(1f),
                             horizontalArrangement = Arrangement.End
                         ) {
-                            Text(text = "${it.stock} unit")
+                            Text(text = stringResource(R.string.unit, it.stock))
                         }
                     }
                 }
@@ -154,9 +161,9 @@ fun <T> BottomSheet(
                                 Row(
                                     modifier = modifier.weight(1f),
                                 ) {
-                                    Text(text = "Mesin")
+                                    Text(text = stringResource(R.string.mesin))
                                 }
-                                Text(text = ":")
+                                Text(text = stringResource(R.string.colon))
                                 Row(
                                     modifier = modifier.weight(1f),
                                     horizontalArrangement = Arrangement.End
@@ -170,9 +177,9 @@ fun <T> BottomSheet(
                                 Row(
                                     modifier = modifier.weight(1f),
                                 ) {
-                                    Text(text = "Tipe Suspensi")
+                                    Text(text = stringResource(R.string.tipe_suspensi))
                                 }
-                                Text(text = ":")
+                                Text(text = stringResource(R.string.colon))
                                 Row(
                                     modifier = modifier.weight(1f),
                                     horizontalArrangement = Arrangement.End
@@ -186,9 +193,9 @@ fun <T> BottomSheet(
                                 Row(
                                     modifier = modifier.weight(1f),
                                 ) {
-                                    Text(text = "Tipe Transmisi")
+                                    Text(text = stringResource(R.string.tipe_transmisi))
                                 }
-                                Text(text = ":")
+                                Text(text = stringResource(R.string.colon))
                                 Row(
                                     modifier = modifier.weight(1f),
                                     horizontalArrangement = Arrangement.End
@@ -208,9 +215,9 @@ fun <T> BottomSheet(
                                 Row(
                                     modifier = modifier.weight(1f),
                                 ) {
-                                    Text(text = "Mesin")
+                                    Text(text = stringResource(R.string.mesin))
                                 }
-                                Text(text = ":")
+                                Text(text = stringResource(R.string.colon))
                                 Row(
                                     modifier = modifier.weight(1f),
                                     horizontalArrangement = Arrangement.End
@@ -224,14 +231,14 @@ fun <T> BottomSheet(
                                 Row(
                                     modifier = modifier.weight(1f),
                                 ) {
-                                    Text(text = "Kapasitas")
+                                    Text(text = stringResource(R.string.kapasitas))
                                 }
-                                Text(text = ":")
+                                Text(text = stringResource(R.string.colon))
                                 Row(
                                     modifier = modifier.weight(1f),
                                     horizontalArrangement = Arrangement.End
                                 ) {
-                                    Text(text = "${it.capacity} penumpang")
+                                    Text(text = stringResource(R.string.penumpang, it.capacity))
                                 }
                             }
                             Row(
@@ -240,9 +247,9 @@ fun <T> BottomSheet(
                                 Row(
                                     modifier = modifier.weight(1f),
                                 ) {
-                                    Text(text = "Tipe")
+                                    Text(text = stringResource(R.string.tipe))
                                 }
-                                Text(text = ":")
+                                Text(text = stringResource(R.string.colon))
                                 Row(
                                     modifier = modifier.weight(1f),
                                     horizontalArrangement = Arrangement.End
@@ -263,7 +270,7 @@ fun <T> BottomSheet(
                     modifier = modifier.align(Alignment.End)
                 ) {
                     OutlinedTextField(
-                        label = { Text(text = "Stok") },
+                        label = { Text(text = stringResource(R.string.jumlah)) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .menuAnchor(),
@@ -310,7 +317,8 @@ fun <T> BottomSheet(
                                         onClick = {
                                             selectedStock[index] = selectionOptions
                                             expandedDropDownMenu[index] = false
-                                        })
+                                        }
+                                    )
 
                                 }
                             }
@@ -320,48 +328,87 @@ fun <T> BottomSheet(
                 }
                 Spacer(modifier = modifier.padding(top = 12.dp))
                 Button(
+                    enabled = vehicle.stock > 0,
                     onClick = {
-                        when (viewModel) {
-                            is CarViewModel -> {
-                                val carViewModel = viewModel as CarViewModel
-                                carViewModel.purchaseVehicle(
-                                    Purchases(
-                                        idVehicle = vehicle.idVehicles,
-                                        total = selectedStock[index] ?: 1,
-                                        idTypeOfVehicle = vehicle.typeId,
+                        if (selectedStock[index]!! > 0) {
+                            when (viewModel) {
+                                is CarViewModel -> {
+                                    val carViewModel = viewModel as CarViewModel
+                                    carViewModel.purchaseVehicle(
+                                        Purchases(
+                                            idVehicle = vehicle.idVehicles,
+                                            total = selectedStock[index] ?: 1,
+                                            idTypeOfVehicle = vehicle.typeId,
+                                            totalPrice = vehicle.price * (selectedStock[index] ?: 1)
+                                        )
                                     )
-                                )
-                                carViewModel.updateStock(
-                                    vehicleId = vehicle.idVehicles,
-                                    quantity = selectedStock[index] ?: 1
-                                )
-                            }
-                            is MotorCyclesViewModel -> {
-                                val motorCyclesViewModel = viewModel as MotorCyclesViewModel
-                                motorCyclesViewModel.purchaseVehicle(
-                                    Purchases(
-                                        idVehicle = vehicle.idVehicles,
-                                        total = selectedStock[index] ?: 1,
-                                        idTypeOfVehicle = vehicle.typeId,
+                                    carViewModel.updateStock(
+                                        vehicleId = vehicle.idVehicles,
+                                        quantity = selectedStock[index] ?: 1
                                     )
-                                )
-                                motorCyclesViewModel.updateStock(
-                                    vehicleId = vehicle.idVehicles,
-                                    quantity = selectedStock[index] ?: 1
-                                )
+                                }
+
+                                is MotorCyclesViewModel -> {
+                                    val motorCyclesViewModel = viewModel as MotorCyclesViewModel
+                                    motorCyclesViewModel.purchaseVehicle(
+                                        Purchases(
+                                            idVehicle = vehicle.idVehicles,
+                                            total = selectedStock[index] ?: 1,
+                                            idTypeOfVehicle = vehicle.typeId,
+                                            totalPrice = vehicle.price * (selectedStock[index] ?: 1)
+                                        )
+                                    )
+                                    motorCyclesViewModel.updateStock(
+                                        vehicleId = vehicle.idVehicles,
+                                        quantity = selectedStock[index] ?: 1
+                                    )
+                                }
                             }
+
+                            showBottomSheet[index] = false
+
+                            openSuccessDialog.value = true
+                        } else {
+                            openEmptyAmountDialog.value = true
                         }
-
-                        showBottomSheet[index] = false
-
 
                     },
                     modifier = modifier.fillMaxWidth(),
                 ) {
-                    Text(text = "Lanjutkan")
+                    Text(text = stringResource(R.string.beli))
                 }
             }
 
         }
+    }
+
+    when {
+        openSuccessDialog.value -> {
+            Dialog(
+                onDismissRequest = { openSuccessDialog.value = false },
+                onConfirmation = { openSuccessDialog.value = false },
+                dialogTitle = stringResource(R.string.pembelian_berhasil),
+                dialogContent = stringResource(
+                    R.string.pembelian_berhasil_dilakukan_sebanyak_unit_dengan_total_harga_rp,
+                    selectedStock[index]!!,
+                    numberFormat.format(
+                        vehicle.price * (selectedStock[index] ?: 1)
+                    )
+                ),
+                icon = Icons.Filled.Verified,
+            )
+        }
+
+        openEmptyAmountDialog.value -> {
+            Dialog(
+                onDismissRequest = { openEmptyAmountDialog.value = false },
+                onConfirmation = { openEmptyAmountDialog.value = false },
+                dialogTitle = stringResource(R.string.info),
+                dialogContent = stringResource(R.string.jumlah_pembelian_tidak_boleh_kosong),
+                icon = Icons.Default.Error,
+            )
+        }
+
+
     }
 }

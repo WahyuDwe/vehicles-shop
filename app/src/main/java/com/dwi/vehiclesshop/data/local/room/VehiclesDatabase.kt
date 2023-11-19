@@ -17,7 +17,7 @@ import com.dwi.vehiclesshop.data.local.model.Vehicles
         Purchases::class
     ], version = 1, exportSchema = false
 )
-abstract class VehiclesDatabase() : RoomDatabase() {
+abstract class VehiclesDatabase : RoomDatabase() {
     abstract fun vehiclesDao(): VehiclesDao
 
     companion object {
@@ -30,7 +30,7 @@ abstract class VehiclesDatabase() : RoomDatabase() {
                 VehiclesDatabase::class.java,
                 "vehicles.db"
             )
-                .createFromAsset("vehicles_string.db")
+                .createFromAsset("vehicles.db")
                 .build()
             INSTANCE = instance
             instance

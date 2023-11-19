@@ -15,7 +15,7 @@ import com.dwi.vehiclesshop.ui.screens.motorcycle.MotorCyclesViewModel
 
 @Composable
 fun MotorCycleContent(
-    modifier : Modifier = Modifier,
+    modifier: Modifier = Modifier,
     vehiclesWithMotorCycles: List<VehiclesWithMotorCycle>,
     viewModel: MotorCyclesViewModel,
 ) {
@@ -31,7 +31,8 @@ fun MotorCycleContent(
                 modifier = modifier,
                 vehicle = vehicle,
                 index = index,
-                showBottomSheet = showBottomSheet
+                showBottomSheet = showBottomSheet,
+                viewModel = viewModel,
             )
             BottomSheet(
                 modifier = modifier,
@@ -41,7 +42,7 @@ fun MotorCycleContent(
                 typeOfVehicle = motorCycles,
                 viewModel = viewModel,
 
-            )
+                )
         }
     }
 }

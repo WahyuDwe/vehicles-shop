@@ -13,6 +13,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.dwi.vehiclesshop.R
 import com.dwi.vehiclesshop.data.local.model.TabItem
 import com.dwi.vehiclesshop.ui.component.HorizontalPager
 import com.dwi.vehiclesshop.ui.component.Tabs
@@ -27,8 +29,8 @@ fun HomeScreen(
     ) {
     var state by remember { mutableIntStateOf(0) }
     val tabItems = listOf(
-        TabItem(title = "Mobil"),
-        TabItem(title = "Motor")
+        TabItem(title = stringResource(R.string.mobil)),
+        TabItem(title = stringResource(R.string.motor))
     )
     val pagerState = rememberPagerState {
         tabItems.size

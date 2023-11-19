@@ -16,6 +16,9 @@ data class Purchases(
     @ColumnInfo(name = "id_tipe_kendaraan")
     val idTypeOfVehicle: String,
 
-    @ColumnInfo(name = "jumlah")
+    @ColumnInfo(name = "jumlah_pembelian")
     val total: Int,
+
+    @ColumnInfo(name = "harga_total")
+    val totalPrice: Int,
 )

@@ -6,9 +6,11 @@ import androidx.room.Relation
 data class VehiclesWithMotorCycle(
     @Embedded
     val vehicles: Vehicles,
+
     @Relation(
         parentColumn = "type_id",
         entityColumn = "id_motor",
     )
+
     val motorCycle: MotorCycle? = null,
 )

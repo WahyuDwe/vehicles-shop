@@ -43,7 +43,6 @@ fun VehiclesShopTheme(
         else -> LightColorScheme
     }
 
-    // set color for status bar
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.dwi.vehiclesshop.data.local.model.MotorCycle
 import com.dwi.vehiclesshop.data.local.model.Purchases
 import com.dwi.vehiclesshop.data.local.model.Vehicles
 import com.dwi.vehiclesshop.data.local.model.VehiclesWithCar
@@ -23,9 +22,11 @@ interface VehiclesDao {
     @Query("SELECT * FROM kendaraan WHERE type_id LIKE 'MB%'")
     fun getVehicleWithCar(): Flow<List<VehiclesWithCar>>
 
-    @Transaction
     @Query("SELECT * FROM kendaraan WHERE id_kendaraan = :id")
     suspend fun getVehicleById(id: String): Vehicles
+
+    @Query("SELECT * FROM pembelian WHERE id_kendaraan = :id")
+    fun getQuantityById(id: String): Flow<List<Purchases>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun purchaseVehicle(purchases: Purchases)

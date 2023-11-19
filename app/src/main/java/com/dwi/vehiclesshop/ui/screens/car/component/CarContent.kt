@@ -33,6 +33,7 @@ fun CarContent(
                 vehicle = vehicle,
                 index = index,
                 showBottomSheet = showBottomSheet,
+                viewModel = viewModel,
             )
             BottomSheet(
                 modifier = modifier,

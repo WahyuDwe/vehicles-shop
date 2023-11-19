@@ -1,9 +1,7 @@
 package com.dwi.vehiclesshop.ui.screens.car
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dwi.vehiclesshop.di.Injection
@@ -17,7 +15,6 @@ fun CarScreen(
         factory = ViewModelFactory(Injection.provideRepository(context = LocalContext.current))
     ),
 ) {
-    Log.d("CarScreen", "CarScreen: ")
     viewModel.uiState.collectAsState(
         initial = UiState.Loading
     ).value.let {
@@ -27,7 +24,6 @@ fun CarScreen(
             }
 
             is UiState.Success -> {
-                Log.d("CarScreen", "CarScreen: ${it.data}")
                 val data = it.data
                 CarContent(
                     vehiclesWithCars = data,

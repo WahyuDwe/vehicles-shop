@@ -13,7 +13,7 @@ data class Car(
     @ColumnInfo(name = "mesin")
     val engine: String,
 
-    @ColumnInfo(name ="kapasitas_penumpang")
+    @ColumnInfo(name = "kapasitas_penumpang")
     val capacity: Int,
 
     @ColumnInfo(name = "tipe")

@@ -11,5 +11,6 @@ data class VehiclesWithCar (
         parentColumn = "type_id",
         entityColumn = "id_mobil",
     )
+
     val car: Car? = null,
 )

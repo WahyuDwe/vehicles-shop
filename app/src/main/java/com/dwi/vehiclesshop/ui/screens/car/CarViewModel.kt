@@ -12,21 +12,25 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class CarViewModel(private val repository: VehiclesRepository) : ViewModel() {
-    private val _uiState: MutableStateFlow<UiState<List<VehiclesWithCar>>> = MutableStateFlow(UiState.Loading)
+    private val _uiState: MutableStateFlow<UiState<List<VehiclesWithCar>>> =
+        MutableStateFlow(UiState.Loading)
+
+    private val _purchaseState: MutableStateFlow<UiState<List<Purchases>>> =
+        MutableStateFlow(UiState.Loading)
 
     val uiState: MutableStateFlow<UiState<List<VehiclesWithCar>>>
         get() = _uiState
 
+    val purchaseState: MutableStateFlow<UiState<List<Purchases>>> get() = _purchaseState
+
     fun getAllCars() {
         viewModelScope.launch {
-            repository.getVehiclesWithCar()
-                .catch {
-                    _uiState.value = UiState.Error(it.message.toString())
-                }
-                .collect {
-                    Log.d("CarViewModel", "getAllCars: $it")
-                    _uiState.value = UiState.Success(it)
-                }
+            repository.getVehiclesWithCar().catch {
+                _uiState.value = UiState.Error(it.message.toString())
+            }.collect {
+                Log.d("CarViewModel", "getAllCars: $it")
+                _uiState.value = UiState.Success(it)
+            }
         }
     }
 
@@ -36,9 +40,19 @@ class CarViewModel(private val repository: VehiclesRepository) : ViewModel() {
         }
     }
 
-    fun updateStock(vehicleId : String, quantity : Int) {
+    fun updateStock(vehicleId: String, quantity: Int) {
         viewModelScope.launch {
             repository.updateVehicle(vehicleId, quantity)
+        }
+    }
+
+    fun getPurchasesById(id: String) {
+        viewModelScope.launch {
+            repository.getPurchasesById(id).catch {
+                Log.e("CarViewModel", "error : $it")
+            }.collect {
+                _purchaseState.value = UiState.Success(it)
+            }
         }
     }
 }
