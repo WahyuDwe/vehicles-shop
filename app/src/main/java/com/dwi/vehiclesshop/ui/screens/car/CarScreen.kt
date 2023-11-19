@@ -13,11 +13,9 @@ import com.dwi.vehiclesshop.utils.ViewModelFactory
 
 @Composable
 fun CarScreen(
-    modifier: Modifier = Modifier,
     viewModel: CarViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository(context = LocalContext.current))
     ),
-    navigateToDetail: (String) -> Unit,
 ) {
     Log.d("CarScreen", "CarScreen: ")
     viewModel.uiState.collectAsState(
@@ -32,9 +30,7 @@ fun CarScreen(
                 Log.d("CarScreen", "CarScreen: ${it.data}")
                 val data = it.data
                 CarContent(
-                    cars = data,
-                    modifier = modifier,
-                    navigateToDetail = navigateToDetail,
+                    vehiclesWithCars = data,
                 )
             }
 
